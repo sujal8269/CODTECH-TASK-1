@@ -1,0 +1,58 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+void displayQuestion(string question, string options[], char correctAnswer, int& score) {
+    char userAnswer;
+    cout << question << endl;
+    for (int i = 0; i < 4; i++) {
+        cout << char('A' + i) << ". " << options[i] << endl;
+    }
+    cout << "Your answer: ";
+    cin >> userAnswer;
+
+    // Convert to uppercase if the user entered a lowercase letter
+    userAnswer = toupper(userAnswer);
+
+    if (userAnswer == correctAnswer) {
+        cout << "Correct!\n\n";
+        score++;
+    } else {
+        cout << "Wrong! The correct answer was " << correctAnswer << ".\n\n";
+    }
+}
+
+int main() {
+    int score = 0;
+    const int numQuestions = 3;
+
+    string questions[numQuestions] = {
+        "What is the capital of France?",
+        "Which language is primarily used for web development?",
+        "Who wrote 'To Kill a Mockingbird'?"
+    };
+
+    string options[numQuestions][4] = {
+        {"Berlin", "Madrid", "Paris", "Rome"},
+        {"Python", "C++", "Java", "JavaScript"},
+        {"Harper Lee", "George Orwell", "J.K. Rowling", "Mark Twain"}
+    };
+
+    char answers[numQuestions] = {'C', 'D', 'A'};
+
+    for (int i = 0; i < numQuestions; i++) {
+        displayQuestion(questions[i], options[i], answers[i], score);
+    }
+
+    cout << "Quiz over! Your score is " << score << " out of " << numQuestions << "." << endl;
+
+    if (score == numQuestions) {
+        cout << "Excellent! You got all answers correct!" << endl;
+    } else if (score >= numQuestions / 2) {
+        cout << "Good job! You got more than half correct!" << endl;
+    } else {
+        cout << "Better luck next time!" << endl;
+    }
+
+    return 0;
+}
